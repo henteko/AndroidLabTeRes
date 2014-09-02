@@ -1,6 +1,7 @@
 package com.henteko07.androidlabteressampleapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,10 +15,20 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
+            final Activity self = this;
             MainFragment mainFragment = new MainFragment();
+            mainFragment.setOnNextBtnClickListener(new MainFragment.OnNextBtnClickListener() {
+                @Override
+                public void onNextClicked(User user) {
+                    Intent intent = new Intent(self,SecondActivity.class);
+                    intent.putExtra(User.USER_KEY, user);
+                    startActivity(intent);
+                }
+            });
 
             Bundle bundle = new Bundle();
             bundle.putInt(MainFragment.NUMBER_KEY, 1);
+            bundle.putString(MainFragment.BUTTON_TEXT_KEY, "次へ");
             mainFragment.setArguments(bundle);
 
             getFragmentManager().beginTransaction()
@@ -25,7 +36,6 @@ public class MainActivity extends Activity {
                     .commit();
         }
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

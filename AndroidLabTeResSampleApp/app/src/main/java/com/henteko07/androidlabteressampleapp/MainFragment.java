@@ -12,16 +12,22 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by kenta.imai on 2014/09/02.
  */
 public class MainFragment extends Fragment {
     public static final String NUMBER_KEY = "number";
+    public static final String BUTTON_TEXT_KEY = "next_button_text";
+
+    private OnNextBtnClickListener mListener;
 
     private TextView mTextView;
     private EditText mNameEditText;
     private Spinner mBloodSpinner;
-    private String mCurrentBlood;
+    private Blood mCurrentBlood;
     private Button mNextButton;
 
     public MainFragment() {
@@ -37,15 +43,20 @@ public class MainFragment extends Fragment {
         mNextButton = (Button) rootView.findViewById(R.id.nextButton);
 
         int number = getArguments().getInt(NUMBER_KEY);
-        setNumberTextView(number);
+        String nextButtonText = getArguments().getString(BUTTON_TEXT_KEY);
+        mNextButton.setText(nextButtonText);
 
+        setNumberTextView(number);
         setBloodSpinner();
 
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // ここで次のActivityに行くかFragmentを表示する
-                // まぁまずはMainActivityに通知するのが先かな
+                String name = mNameEditText.getText().toString();
+                if (name.isEmpty()) return;
+
+                User user = new User(name, mCurrentBlood);
+                mListener.onNextClicked(user);
             }
         });
 
@@ -57,14 +68,14 @@ public class MainFragment extends Fragment {
     }
 
     private void setBloodSpinner() {
+        List<Blood> bloodList = Arrays.asList(Blood.values());
+        mCurrentBlood = Blood.valueOf(Blood.A.toString());
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        adapter.add("A");
-        adapter.add("B");
-        adapter.add("O");
-        adapter.add("AB");
-
-        mCurrentBlood = adapter.getItem(0);
+        for (Blood blood : bloodList) {
+            adapter.add(blood.toString());
+        }
 
         mBloodSpinner.setAdapter(adapter);
         mBloodSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -73,11 +84,19 @@ public class MainFragment extends Fragment {
                                        int position, long id) {
                 Spinner spinner = (Spinner) parent;
                 String item = (String) spinner.getSelectedItem();
-                mCurrentBlood = item;
+                mCurrentBlood = Blood.valueOf(item);
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
+    }
+
+    public interface OnNextBtnClickListener {
+        public void onNextClicked(User user);
+    }
+
+    public void setOnNextBtnClickListener(OnNextBtnClickListener l) {
+        mListener = l;
     }
 }
