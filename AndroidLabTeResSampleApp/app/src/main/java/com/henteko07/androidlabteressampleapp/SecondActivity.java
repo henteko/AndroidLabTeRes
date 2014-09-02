@@ -1,8 +1,8 @@
 package com.henteko07.androidlabteressampleapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 /**
  * Created by kenta.imai on 2014/09/02.
@@ -23,8 +23,10 @@ public class SecondActivity extends Activity {
             mainFragment.setOnNextBtnClickListener(new MainFragment.OnNextBtnClickListener() {
                 @Override
                 public void onNextClicked(User user) {
-                    Log.d("#########################################", mFirstUser.name + " " + mFirstUser.blood.toString());
-                    Log.d("#########################################", user.name + " " + user.blood.toString());
+                    Intent intent = new Intent(self,ResultActivity.class);
+                    intent.putExtra(User.USER_KEY, mFirstUser);
+                    intent.putExtra(User.SECOND_USER_KEY, user);
+                    startActivity(intent);
                 }
             });
 

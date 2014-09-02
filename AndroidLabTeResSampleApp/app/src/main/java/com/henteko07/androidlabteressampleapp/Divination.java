@@ -5,10 +5,16 @@ package com.henteko07.androidlabteressampleapp;
  */
 public class Divination {
     public final String result;
-    public final float compatibility;
+    public final Double compatibility;
 
-    public Divination(User user1, User user2) {
+    public final User mfirstUser;
+    public final User msecondUser;
+
+    public Divination(User firstUser, User secondUser) {
+        mfirstUser = firstUser;
+        msecondUser = secondUser;
+
         this.result = "めっちゃいいでw";
-        this.compatibility = 100.0f;
+        this.compatibility = 100.0;
     }
 }
