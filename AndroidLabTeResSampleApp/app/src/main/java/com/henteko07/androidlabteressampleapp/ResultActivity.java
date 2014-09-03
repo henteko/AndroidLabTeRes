@@ -20,10 +20,8 @@ public class ResultActivity extends Activity {
         if (savedInstanceState == null) {
             ResultFragment resultFragment = new ResultFragment();
 
-            // TODO: 名前とかも渡したいので、Divination自体を渡すようにする
             Bundle bundle = new Bundle();
-            bundle.putString(ResultFragment.RESULT_KEY, divination.result);
-            bundle.putDouble(ResultFragment.COMPATIBILITY_KEY, divination.compatibility);
+            bundle.putSerializable(ResultFragment.RESULT_KEY, divination);
             resultFragment.setArguments(bundle);
 
             getFragmentManager().beginTransaction()

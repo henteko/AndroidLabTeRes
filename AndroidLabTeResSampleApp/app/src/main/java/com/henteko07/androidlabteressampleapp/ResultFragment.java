@@ -12,7 +12,6 @@ import android.widget.TextView;
  */
 public class ResultFragment extends Fragment {
     public static final String RESULT_KEY = "result";
-    public static final String COMPATIBILITY_KEY = "compatibility";
 
     public ResultFragment() {
     }
@@ -22,14 +21,16 @@ public class ResultFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_result, container, false);
 
-        String result = getArguments().getString(RESULT_KEY);
-        Double compatibility = getArguments().getDouble(COMPATIBILITY_KEY);
+        Divination divination = (Divination) getArguments().getSerializable(RESULT_KEY);
+
+        TextView textView = (TextView) rootView.findViewById(R.id.textView);
+        textView.setText(String.format("%sさんと%sさんの相性結果", divination.firstUser.name, divination.secondUser.name));
 
         TextView compatibilityTextView = (TextView) rootView.findViewById(R.id.compatibilityTextView);
-        compatibilityTextView.setText(String.format("%s ％の相性です", compatibility));
+        compatibilityTextView.setText(String.format("%s ％の相性です", divination.compatibility));
 
         TextView resultTextView = (TextView) rootView.findViewById(R.id.resultTextView);
-        resultTextView.setText(result);
+        resultTextView.setText(divination.result);
 
         return rootView;
     }
