@@ -1,4 +1,6 @@
-package com.henteko07.androidlabteressampleapp;
+package com.henteko07.androidlabteressampleapp.Model;
+
+import com.henteko07.androidlabteressampleapp.Model.Blood;
 
 import java.io.Serializable;
 

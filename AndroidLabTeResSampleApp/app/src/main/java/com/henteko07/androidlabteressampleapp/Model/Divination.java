@@ -1,4 +1,4 @@
-package com.henteko07.androidlabteressampleapp;
+package com.henteko07.androidlabteressampleapp.Model;
 
 import java.io.Serializable;
 

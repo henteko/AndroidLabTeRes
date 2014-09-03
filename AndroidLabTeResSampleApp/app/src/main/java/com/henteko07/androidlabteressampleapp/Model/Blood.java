@@ -1,4 +1,4 @@
-package com.henteko07.androidlabteressampleapp;
+package com.henteko07.androidlabteressampleapp.Model;
 
 /**
  * Created by kenta.imai on 2014/09/02.

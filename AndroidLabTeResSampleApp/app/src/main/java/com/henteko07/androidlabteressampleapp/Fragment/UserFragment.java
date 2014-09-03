@@ -1,4 +1,4 @@
-package com.henteko07.androidlabteressampleapp;
+package com.henteko07.androidlabteressampleapp.Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -12,6 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import com.henteko07.androidlabteressampleapp.Model.Blood;
+import com.henteko07.androidlabteressampleapp.Model.User;
+import com.henteko07.androidlabteressampleapp.R;
 
 import java.util.Arrays;
 import java.util.List;

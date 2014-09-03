@@ -1,7 +1,12 @@
-package com.henteko07.androidlabteressampleapp;
+package com.henteko07.androidlabteressampleapp.Activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.henteko07.androidlabteressampleapp.Model.Divination;
+import com.henteko07.androidlabteressampleapp.R;
+import com.henteko07.androidlabteressampleapp.Fragment.ResultFragment;
+import com.henteko07.androidlabteressampleapp.Model.User;
 
 /**
  * Created by kenta.imai on 2014/09/02.
