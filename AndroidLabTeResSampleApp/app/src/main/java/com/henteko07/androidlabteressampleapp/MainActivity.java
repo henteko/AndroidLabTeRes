@@ -8,23 +8,14 @@ import android.view.MenuItem;
 
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements MainFragment.OnNextBtnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if (savedInstanceState == null) {
-            final Activity self = this;
             MainFragment mainFragment = new MainFragment();
-            mainFragment.setOnNextBtnClickListener(new MainFragment.OnNextBtnClickListener() {
-                @Override
-                public void onNextClicked(User user) {
-                    Intent intent = new Intent(self,SecondActivity.class);
-                    intent.putExtra(User.USER_KEY, user);
-                    startActivity(intent);
-                }
-            });
 
             Bundle bundle = new Bundle();
             bundle.putInt(MainFragment.NUMBER_KEY, 1);
@@ -54,5 +45,12 @@ public class MainActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onNextClicked(User user) {
+        Intent intent = new Intent(this, SecondActivity.class);
+        intent.putExtra(User.USER_KEY, user);
+        startActivity(intent);
     }
 }

@@ -1,5 +1,6 @@
 package com.henteko07.androidlabteressampleapp;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -56,7 +57,9 @@ public class MainFragment extends Fragment {
                 if (name.isEmpty()) return;
 
                 User user = new User(name, mCurrentBlood);
-                mListener.onNextClicked(user);
+                if (mListener != null) {
+                    mListener.onNextClicked(user);
+                }
             }
         });
 
@@ -96,7 +99,12 @@ public class MainFragment extends Fragment {
         public void onNextClicked(User user);
     }
 
-    public void setOnNextBtnClickListener(OnNextBtnClickListener l) {
-        mListener = l;
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if(activity instanceof OnNextBtnClickListener == false) {
+            throw new ClassCastException("Activity not implements OnNextBtnClickListener.");
+        }
+        mListener = (OnNextBtnClickListener)activity;
     }
 }

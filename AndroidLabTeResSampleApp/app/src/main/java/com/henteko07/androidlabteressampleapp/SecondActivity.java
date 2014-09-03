@@ -7,7 +7,7 @@ import android.os.Bundle;
 /**
  * Created by kenta.imai on 2014/09/02.
  */
-public class SecondActivity extends Activity {
+public class SecondActivity extends Activity implements MainFragment.OnNextBtnClickListener {
     private User mFirstUser;
 
     @Override
@@ -18,17 +18,7 @@ public class SecondActivity extends Activity {
         mFirstUser = (User) getIntent().getSerializableExtra(User.USER_KEY);
 
         if (savedInstanceState == null) {
-            final Activity self = this;
             MainFragment mainFragment = new MainFragment();
-            mainFragment.setOnNextBtnClickListener(new MainFragment.OnNextBtnClickListener() {
-                @Override
-                public void onNextClicked(User user) {
-                    Intent intent = new Intent(self,ResultActivity.class);
-                    intent.putExtra(User.USER_KEY, mFirstUser);
-                    intent.putExtra(User.SECOND_USER_KEY, user);
-                    startActivity(intent);
-                }
-            });
 
             Bundle bundle = new Bundle();
             bundle.putInt(MainFragment.NUMBER_KEY, 2);
@@ -39,5 +29,13 @@ public class SecondActivity extends Activity {
                     .add(R.id.container, mainFragment)
                     .commit();
         }
+    }
+
+    @Override
+    public void onNextClicked(User user) {
+        Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra(User.USER_KEY, mFirstUser);
+        intent.putExtra(User.SECOND_USER_KEY, user);
+        startActivity(intent);
     }
 }
