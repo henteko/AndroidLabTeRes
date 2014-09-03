@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by kenta.imai on 2014/09/02.
  */
-public class MainFragment extends Fragment {
+public class UserFragment extends Fragment {
     public static final String NUMBER_KEY = "number";
     public static final String BUTTON_TEXT_KEY = "next_button_text";
 
@@ -31,13 +31,13 @@ public class MainFragment extends Fragment {
     private Blood mCurrentBlood;
     private Button mNextButton;
 
-    public MainFragment() {
+    public UserFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_user, container, false);
         mTextView = (TextView) rootView.findViewById(R.id.textView);
         mNameEditText = (EditText) rootView.findViewById(R.id.nameEditText);
         mBloodSpinner = (Spinner) rootView.findViewById(R.id.bloodSpinner);
