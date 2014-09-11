@@ -52,6 +52,10 @@ Android端末を持っていない人は、[Genymotion](http://www.genymotion.co
 もし詰まったりしたらすぐに近くの人に聞いてください。  
 ![image](http://i.gyazo.com/9039404723548f379d9d71165d987183.png)
 
+Windowsを使ってる人でパスに日本語が含まれているとめんどくさいようです。  
+以下のURLを参考にしたり聞いたりして頑張りましょう。  
+http://ma-bank.net/blog/36/?mob=2
+
 ## Hello World!
 AndroidStudioのインストールが終わったら、ついにアプリを作ってみましょう！  
 といっても最初はお決まりのHello Worldです！  
