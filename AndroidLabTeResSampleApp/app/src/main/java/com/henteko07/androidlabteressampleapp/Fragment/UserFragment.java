@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.henteko07.androidlabteressampleapp.Model.Blood;
 import com.henteko07.androidlabteressampleapp.Model.User;
+import com.henteko07.androidlabteressampleapp.Model.Sex;
 import com.henteko07.androidlabteressampleapp.R;
 
 import java.util.Arrays;
@@ -32,7 +33,9 @@ public class UserFragment extends Fragment {
     private TextView mTextView;
     private EditText mNameEditText;
     private Spinner mBloodSpinner;
+    private Spinner mSexSpinner;
     private Blood mCurrentBlood;
+    private Sex mCurrentSex;
     private Button mNextButton;
 
     public UserFragment() {
@@ -45,6 +48,7 @@ public class UserFragment extends Fragment {
         mTextView = (TextView) rootView.findViewById(R.id.textView);
         mNameEditText = (EditText) rootView.findViewById(R.id.nameEditText);
         mBloodSpinner = (Spinner) rootView.findViewById(R.id.bloodSpinner);
+        mSexSpinner = (Spinner) rootView.findViewById(R.id.sexSpinner);
         mNextButton = (Button) rootView.findViewById(R.id.nextButton);
 
         int number = getArguments().getInt(NUMBER_KEY);
@@ -53,6 +57,7 @@ public class UserFragment extends Fragment {
 
         setNumberTextView(number);
         setBloodSpinner();
+        setSexSpinner();
 
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,7 +65,7 @@ public class UserFragment extends Fragment {
                 String name = mNameEditText.getText().toString();
                 if (name.isEmpty()) return;
 
-                User user = new User(name, mCurrentBlood);
+                User user = new User(name, mCurrentBlood, mCurrentSex);
                 if (mListener != null) {
                     mListener.onNextClicked(user);
                 }
@@ -92,6 +97,31 @@ public class UserFragment extends Fragment {
                 Spinner spinner = (Spinner) parent;
                 String item = (String) spinner.getSelectedItem();
                 mCurrentBlood = Blood.valueOf(item);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+    }
+
+    private void setSexSpinner() {
+        List<Sex> sexList = Arrays.asList(Sex.values());
+        mCurrentSex = Sex.valueOf(Sex.Man.toString());
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        for (Sex sex : sexList) {
+            adapter.add(sex.toString());
+        }
+
+        mSexSpinner.setAdapter(adapter);
+        mSexSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                Spinner spinner = (Spinner) parent;
+                String item = (String) spinner.getSelectedItem();
+                mCurrentSex = Sex.valueOf(item);
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {

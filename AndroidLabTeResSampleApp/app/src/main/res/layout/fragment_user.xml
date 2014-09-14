@@ -41,6 +41,14 @@
         android:layout_height="wrap_content"
         android:text="Next"
         android:id="@+id/nextButton"
+        android:layout_below="@+id/sexSpinner"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sexSpinner"
         android:layout_below="@+id/bloodSpinner"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

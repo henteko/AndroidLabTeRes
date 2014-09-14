@@ -13,9 +13,12 @@ public class User implements Serializable {
 
     public final String name;
     public final Blood blood;
+    public final Sex sex;
 
-    public User(String name, Blood blood) {
-        this.name = name;
+    public User(String name, Blood blood, Sex sex) {
+        String prefix = (sex == Sex.Man) ? "♂" : "♀";
+        this.name = prefix + name;
         this.blood = blood;
+        this.sex = sex;
     }
 }
